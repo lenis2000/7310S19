@@ -1,0 +1,338 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{sectsty}
+\usepackage{array}
+\newcommand{\R}{\mathbb{R}}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{titlesec}
+% \titleformat{\section}{\bfseries \filcenter}{}{1em}{}
+% \titleformat{\subsection}[block]{\filcenter}{}{1em}{}
+\setlength{\parindent}{1.7em}
+\renewcommand{\baselinestretch}{1}
+
+\usepackage[mathscr]{euscript}
+
+
+\usepackage{amsthm} 
+\usepackage{tikz-cd}
+
+\newtheorem*{fact*}{Fact}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem*{claim}{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{theorem*}{Theorem*}
+\theoremstyle{definition}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}{Example}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{example*}{Example}
+\newtheorem*{remark*}{Remark}
+\newtheorem*{formula*}{Formula}
+\newcommand\myeq{\mathrel{\stackrel{\makebox[0pt]{\mbox{\normalfont\tiny (a)}}}{=}}}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{young}
+\usepackage[vcentermath]{youngtab}
+
+\title{7310 Lecture notes. Spring 2019}
+\author{Instructor: Leonid Petrov}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Typing credits}
+
+\begin{enumerate}
+	\item January 15 and 17, 2019 --- Yichen Ma
+\end{enumerate}
+
+\part{Construction of measure}
+
+\section{Jan 15, 2019}
+
+A few completions of of $\mathbb{Q}$:
+
+1) Cauchy sequences
+
+2) Dedekind cuts
+
+3) Axiomated total ordered complete fields
+
+4) Decimal expanation up to equivalence class
+
+
+\begin{definition}
+Dedekind cut is a pair of non-empty sets $(A,B)$ such that it satisfies $\mathbb{Q} = A \sqcup B$ and the following:
+
+1. if $x \in A$, $y < x$ $\Longrightarrow$ $y \in A$, i.e., A is order-closed downwards.
+
+2. if $x \in B$, $y \geq x$, $\Longrightarrow$ $y \in B$, i.e., B is order-closed upwards.
+
+3. A does not have a maximum element
+\end{definition}
+Define $\mathbb{R} = \{$Dedekind cuts of $\mathbb{Q}\}$. For simplicity, we can use $A$ to represent the pair $(A,B)$. Note we can define an order on $\mathbb{R}$ by set inclusion with respect to $A$. We can also define addition. subtraction, multiplication, division on $\mathbb{R}$ such that $\mathbb{R}$ is totally ordered, complete field.
+
+\begin{theorem}
+$\mathbb{R}$ is uncountable.
+\end{theorem}
+\begin{proof}
+	Diagonal process. The complete proof is left as an exercise for the reader.
+\end{proof}
+
+Question 1: What is the {\bf length} $\ell$ of a subset of $\mathbb{R}$?
+
+a) $\ell([0,1]) = 1$;
+
+b) $\ell(\{x\}) = 0$ for any $x \in \mathbb{R}$;
+
+c) $\ell(\{x \in \mathbb{R}: x = 0.{*}{*}3{*}{*}{*}{*}{*}...\})$ = $\frac{1}{10}$.
+This is the set of decimal expansions such that there is a ``3'' in the third place after the dot.
+
+\vspace{3mm}
+
+{\bf Axioms of length on $\mathbb{R}$}:
+
+1. $\ell([0,1]) = 1$. i.e., normalized;
+
+2. for $A \subseteq \mathbb{R}$ such that $A = A_1 \sqcup A_2 \sqcup ...$, $
+(A) = \sum_{i=1}^{\infty} 
+(A_i)$, i.e., countable additivity;
+
+3. for $A \subseteq \mathbb{R}$, $\alpha \in \mathbb{R}$, $\ell(A+\alpha) = \ell(A)$, i.e., transitivity-invariant.
+
+\begin{theorem}
+Consider the length $\ell : 2^\mathbb{R} = P(\mathbb{R}) \longrightarrow [0,\infty]$, such length does not exist.
+\end{theorem}
+\begin{proof}
+We can write $[0,1) = \bigsqcup_{r \in N}(\mathbb{Q}+r) \cap [0,1)$, where $N$ is the collection of representatives of each equivalence class with respect to the following equivalence relation: $x \sim y \Longleftrightarrow x-y \in \mathbb{Q}$. Note that we need Axiom of Choice to define $N$. Then as length is transitivity-invariant, $\ell(N) = \ell(N+\alpha) \forall\ \alpha$. Hence 1 = $\ell([0,1))$ = $\sum_{x \in N} \ell(N+x)$, but the right hand side is the sum of countably infinite elements with the same value, either equals 0 or infinity. Contradiction.
+\end{proof}
+\begin{corollary}
+There exist non-measurable sets.
+\end{corollary}
+
+\begin{definition}
+Let $X$ be a set. $\mu\colon 2^X \longrightarrow [0, \infty]$ is called an {\bf outer measure} if
+
+1. $\mu(\varnothing) = 0$;
+
+2. if $A \subseteq \bigcup_{k=1}^\infty A_k$, then $\mu(A) \leq \bigcup_{k=1}^\infty \mu(A_k)$ (Hence $\mu(A) \leq \mu(B)$ if $A \subseteq B$).
+\end{definition}
+
+
+\begin{definition}
+Let $X$ be a set, $\mu$ an outer measure defined on $X$. Then $A \subseteq X$ is called $\mu$-measurable if for all $B \subseteq X$, $\mu(B) = \mu(B \cap A)+\mu(B \cap A^c)$
+\end{definition}
+
+\begin{definition}
+Let $X$ be a set. $\mathscr{F} \subseteq X$ is called $\sigma$-algebra if 
+
+1. $\varnothing \in \mathscr{F}$
+
+2. $A \in \mathscr{F}$ $\Longrightarrow$ $A^c \in \mathscr{F}$
+
+3. if $A_1, A_2,... \in \mathscr{F}$, then $\bigcup_{k=1}^\infty A_k \in \mathscr{F}$
+\end{definition}
+
+We will eventually prove the following important theorem:
+\begin{theorem}[Caratheodory Extension Theorem]
+Let $X$ be a set, $\mu$ an outer measure on $X$. Then the class of $\mu$-measurable sets is a $\sigma$-algebra.
+\end{theorem}
+
+
+Below are some examples of $\sigma$-algebras:
+\begin{itemize}
+	\item $X$ countable, $\mathscr{F} = 2^X$ is a $\sigma$-algebra;
+
+    \item for any set $X$, $\mathscr{F} = \{\varnothing, X\}$ is called the trivial $\sigma$-algebra;
+    
+    \item for any set $X$, $A \subseteq X$, $\mathscr{F} = \{ \varnothing, A, A^c, X\}$ is a $\sigma$-algebra (generated by the set $A$).
+    That is, we define $\sigma(A)$ = $\{\varnothing, A, A^c, X\}$ = $\bigcap_{\{\mathscr{F} \in S\}} \mathscr{F}$, where $S = \{$$\mathscr{F}$ is a $\sigma$-algebra containing A$\}$. 
+\end{itemize}
+
+\begin{proposition}
+Let $X$ be a set. For any set $\Gamma$ (not necessarily countable), if $\mathscr{F}_x$ is a $\sigma$-algebra on $X$ for all $x \in \Gamma$, then $\bigcap_{x \in \Gamma} \mathscr{F}_x$ is also a $\sigma$-algebra.
+\end{proposition}
+\begin{proof}
+	Exercise left for the reader.
+\end{proof}
+
+\begin{definition}
+The Borel $\sigma$-algebra of $\mathbb{R}^d$ (d $\geq$ 1), denoted as $B(\mathbb{R}^d)$, 
+is defined as the $\sigma$-algebra generated by all open sets in $\mathbb{R}^d$. 
+\end{definition}
+The Borel $\sigma$-algebra has countable generating sets (e.g. rational rectangles).
+
+
+\section{Jan 17, 2019}
+
+\begin{definition}
+Let $X$ be a set, $\mathscr{F}$ a $\sigma$-algebra on $X$. Then a {\bf measure} on $\mathscr{F}$ is a function $\mu: \mathscr{F} \longrightarrow [0,\infty]$ such that
+
+a) $\mu(\varnothing) = 0$;
+
+b) for $A_1, A_2,... \in \mathscr{F}$ such that $A_i \cap A_j = \varnothing$ for $i \neq j$, $\mu(\bigcup_{i = 1}^\infty A_i) = \sum_{i=1}^\infty \mu(A_i)$, i.e., $\mu$ is countably additive. 
+
+We call $(X,\mathscr{F},\mu)$ a {\bf measure space}.
+\end{definition}
+
+Below are some examples of measure spaces. Let $X$ be a set.
+\begin{itemize}
+    \item Fix $x \in X$, then for $A \subseteq X$ consider $\delta$: $X \longrightarrow [0,\infty]$ by $$\delta(A) = \left\{  
+        \begin{array}{cc}
+        0 & if \hspace{1mm} x \notin A \\
+        1 & if \hspace{1mm} x \in A
+    \end{array}\right.
+    $$ 
+    This is called the $\delta$-measure at $x \in X$.
+    \item Let $\mathscr{F} = 2^X$, for $A \in X$, define $\mu$ such that $\mu(A) = 0$ if $A$ is countable, and $\mu(A) = 1$ if $A$ is co-countable (i.e., $A^c$ is countable). Then $(X,\mathscr{F},\mu)$ is a measure space.
+    \item For $X$ countable, i.e., $X = \{x_1, x_2,...\}$. Let $\mathscr{F} = 2^X$. Denote 
+    $p(x_i) =$ weight of $x_i$, then for $A \subseteq X$, define $\mu(A) = \sum_{x \in A}p(x)$. $(X,\mathscr{F}, \mu)$ is a measure space.
+\end{itemize}
+
+\vspace{3mm}
+
+{\bf Properties of a measure space $(X, F, \mu)$}
+
+\begin{enumerate}
+    \item for $A, B \subseteq X$, $A \subseteq B$ $\Longrightarrow$ $\mu(A) \leq \mu(B)$;
+    \item (countably subadditive) if $A \subseteq \bigcup_{i=1}^\infty A_i$ $\Longrightarrow$ $\mu(A) \leq \sum_{i=1}^\infty \mu(A_i)$;
+    \item (continuity) for a sequence of subsets in $X$, $A_1 \subseteq A_2 \subseteq ...$, 
+    $$\mu(\bigcup_{i=1}^\infty A_i) = \lim_{i \rightarrow \infty} \mu(A_i);$$
+    for a sequence of subsets in $X$, $A_1 \supseteq A_2 \supseteq ...$ such that $\mu(A_i) < \infty$ $\forall i$, 
+    $$\mu(\bigcap_{i=1}^\infty A_i) = \lim_{i \rightarrow \infty} \mu(A_i).$$
+\end{enumerate}
+
+\vspace{3mm}
+
+A counterexample for 3) if we drop the condition ``$\mu(A_i)< \infty$ $\forall i$" is $X = \mathbb{R}$, $F = \sigma(\mathbb{R})$, $A_i = (i, \infty)$ for $i \in \mathbb{N}$, then each $\mu(A_i) = \infty$ but $lim_{i \rightarrow \infty} \mu(A_i) = 0$.
+
+\begin{definition}
+Let $(X,F,\mu)$ be a measure space. $\mu$ is called {\bf finite} if $\mu(X) < \infty$, $\mu$ is called \textbf{$\sigma$-finite} if $X = \bigcup E_n$ where $\mu(E_n) < \infty$ $\forall n$.
+\end{definition}
+
+\vspace{3mm}
+
+\noindent 
+{\bf Semicontinuity.} Let $\{A_n: n \in \mathbb{N}\}$ be a collection of sets. Then define
+\begin{align*}
+	&
+	\text{$\liminf A_n$ = $\{$elements in almost all $A_n \}$ = $\bigcup_{n=1}^\infty(\bigcap_{k=n}^\infty A_k)$},
+	\\&
+	\text{$\limsup A_n$ = $\{$elements in $A_n$ infinitely often$\}$ = $\bigcap_{n=1}^\infty(\bigcup_{k=n}^\infty A_k)$}.
+\end{align*}
+
+\begin{proposition} We have
+	\begin{equation*}
+		\mu(\limsup A_n) \geq \limsup \mu(A_n),\qquad 
+		\mu(\liminf A_n) \le \liminf \mu(A_n).
+	\end{equation*}
+\end{proposition}
+\begin{proof}
+	Homework exercise.
+\end{proof}
+
+\begin{definition}
+Consider $(X,\mathscr{F}, \mu)$, $B \in \mathscr{F}$ is called a {\bf null set} if $\mu(B) = 0$. Note if $B$ is a null set, $A \subseteq B$, then $\mu(A) = 0$
+in the sense of outer measure
+(not necessarily $A \in \mathscr{F}$).
+\end{definition}
+
+\begin{definition} $(X,\mathscr{F})$ is {\bf complete} if all null sets are contained in $\mathscr{F}$.
+\end{definition}
+
+Here we introduce a notation ``{\bf a.e}", the abbreviation of ``almost everywhere". Something happens a.e. if it happens outside a null set. Here are a few examples:
+
+\noindent
+Consider the Dirichlet function $f(x) = \left\{ \begin{array}{cc}
+    1 &  if \hspace{1mm} x \in \mathbb{Q} \\
+    0 &  if \hspace{1mm} x \in \mathbb{R} \backslash \mathbb{Q}
+\end{array}\right.$. Then $f(x) = 0$ a.e.
+
+\noindent
+Consider the (small) Riemann function $f(x) = \left\{ \begin{array}{cc}
+    \frac{1}{q} & if \hspace{1mm} x = \frac{p}{q} \in \mathbb{Q}   \\
+    0  & if \hspace{1mm} x \in \mathbb{R} \backslash \mathbb{Q}
+\end{array}\right.$. Then $f$ is continuous a.e.
+
+\begin{theorem}
+There is an unique completion of any measure space $(X,\mathscr{F},\mu)$. i.e., there exist $\overline{\mathscr{F}}, \overline{\mu}$ with $\overline{\mathscr{F}} \supseteq \mathscr{F}$ and $\overline{\mu}|_\mathscr{F} = \mu$. Specifically, 
+$$\overline{\mathscr{F}} = \{A \cup B| \hspace{1mm} A \in \mathscr{F}, B \subseteq N \textnormal{ for some } N \in \mathscr{F}, \mu(N)=0 \},$$
+which satisfies:
+
+1) $\overline{\mathscr{F}}$ is a $\sigma$-algebra;
+
+2) there exists unique extension $\overline{\mu}$ of $\mu$, from $\mathscr{F}$ to $\overline{\mathscr{F}}$ such that $\overline{\mu}|_\mathscr{F} = \mu$. 
+\end{theorem}
+\begin{proof}
+Let $\mathscr{N} = \{N \in \mathscr{F}: \mu(N) = 0\}$. Then it is closed under countable unions and complement, hence so is a$\overline{\mathscr{F}}$. Then set $\overline{\mu}(A \cup B) = \mu(A)$
+if $B\subseteq N\in \mathscr{N}$. Then it is left as an exercise to the reader to check:
+
+a) $\overline{\mu}$ is well-defined (i.e., if there
+is another way of writing $A\cup B=A'\cup B'$, $B'\subseteq N'\in \mathscr{N}$, then the measure
+does not change);
+
+b) $\overline{\mu}$ is a measure;
+
+c) $\overline{\mu}$ is a unique extension to $\overline{\mathscr{F}}$ defined in 
+the claim.
+\end{proof}
+
+Note that the Borel $\sigma$-algebra is not complete with respect to the length measure $\ell$.
+
+\vspace{3mm}
+
+Let $X$ be a set. Recall the definition of the outer measure $\mu$ on $2^X$.
+
+\begin{definition}
+$A \subseteq X$ is a $\mu$-measurable set with respect to $\mu$ if $\mu(A) = \mu(A\cap B) + \mu(A \cap B^c)$ $\forall B \in 2^X$.
+\end{definition}
+
+We now begin the proof of the 
+Caratheodory's extension theorem:
+
+\begin{theorem}[Caratheodory]
+Let $\mu$ be an outer measure on a set $X$, then the following statements are true:
+
+1) $\mathscr{F} = \{A\colon \textnormal{$A$ is a $\mu$-measurable set}\}$ is a $\sigma$-algebra;
+
+2) $\mu|_\mathscr{F}$ is a complete measure.
+
+\end{theorem}
+\begin{proof}
+    For 1), first of all, $\mathscr{F}$ is closed under complement by the definition of the outer measure and the measurable sets. Then for $A, B \in \mathscr{F}$, take any $S \subseteq X$, then
+    \begin{multline*}\mu(S) = \mu(S \cap A) + \mu(S \cap A^c) \\= \mu(S \cap A \cap B) + \mu(S \cap A \cap B^c) + \mu(S \cap A^c \cap B) + \mu(S \cap A^c \cap B^c).
+    \end{multline*}
+    Note $A \cup B = (A \cap B) \cup (A \cap B^c) \cup (A^c \cap B)$, then by subadditivity, 
+    $$\mu (S \cap (A \cap B)) + \mu(S \cap (A \cap B^c)) + \mu(S \cap (A^c \cap B)) \geq \mu(S \cap (A\cup B)).$$ 
+    Hence $\mu(S) \geq \mu(E \cap (A \cup B)) + \mu(E \cap (A\cup B)^c)$. Hence $A \cup B \in \mathscr{F}$, so $\mathscr{F}$ is an algebra. 
+
+		Also, if $A, B \in \mathscr{F}$ with $A \cap B = \varnothing$, $$\mu(A \cup B) = \mu((A\cup B)\cap A) + \mu((A \cup B) \cap A^c) = \mu(A) + \mu(B).$$ This shows finite additivity of $\mu$ on $\mathscr{F}$. 
+    
+    (other parts will be proven next time.) 
+\end{proof}
+
+We will also work with outer measures 
+constructed using pre-measures:
+
+\begin{definition}
+	Let $X$ be a set, $\Gamma \subseteq 2^X$, $\nu: \Gamma \longrightarrow [0, \infty]$ be any function. Then the {\bf pre-measure} $\mu$ on $2^X$ is defined as for $F \in 2^X$, $$ \mu(F) = \inf \biggl\{\sum_{n=1}^\infty \nu(A_n): A_n \in \Gamma, F \subseteq \bigcup_{n=1}^\infty A_n\biggr\}.$$
+	By agreement, $\inf \varnothing = 0$.
+\end{definition}
+
+\begin{proposition}
+With the same set up as above, $\mu$ is an outer measure. 
+\end{proposition}
+\begin{proof}
+	This will also be proven next time.
+\end{proof}
+
+
+\end{document}
