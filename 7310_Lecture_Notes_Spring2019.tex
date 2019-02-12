@@ -627,85 +627,85 @@ Let us now focus on properties of measures
 which come from a countably additive pre-measure.
 This will complete the construction of the measure.
 
-\begin{prop}
-        If \( \mu \) is a measure constructed by the pre-measure \(\nu\), then
-        \( \mu \restrict_{\mathcal{A}} = \nu \restrict_{\mathcal{A}} \).
-    \end{prop}
-    \begin{proof}
-        Take an \( E \in \mathcal{A} \) and cover it with sets \( I_{i} \in
-        \mathcal{A} \), i.e. \( E \subseteq \cup_{j =
+\begin{proposition}
+    If \( \mu \) is a measure constructed by the pre-measure \(\nu\), then
+    \( \mu \big\vert_{\mathcal{A}} = \nu \big\vert_{\mathcal{A}} \).
+\end{proposition}
+\begin{proof}
+    Take an \( E \in \mathcal{A} \) and cover it with sets \( I_{i} \in
+    \mathcal{A} \), i.e. \( E \subseteq \cup_{j =
+    1}^{\infty}
+    I_{j}\). Now let \( B_{n} = E \cap (I_{n} \setminus \cup_{j = 1}^{n - 1}
+    I_{j}) \) which disjointly cover \(E\). We then get
+    \begin{displaymath}
+        \nu(E) = \sum_{i = 1}^{\infty} \nu(B_{i}) \leq \sum_{i = 1}^{\infty}
+        \nu(I_{i}).
+    \end{displaymath}
+    If we take the infimum over any such sets \( I_{j} \), we have that \(
+    \nu(E) \leq \mu(E) \).
+
+    Since \( E \subseteq E \), we already have that \( \mu(E) \leq
+    \nu(E) \). Thus, \( \nu \big\vert_{\mathcal{A}} = \mu
+    \big\vert_{\mathcal{A}} \).
+\end{proof}
+%}}}
+
+%{{{
+\begin{proposition}
+    Let \( \mathcal{A} \) be the set of finite unions of half-open
+    intervals. Then for any \(\mu\), all the sets in \( \mathcal{A} \) are
+    \(\mu\)-measurable.
+\end{proposition}
+\begin{proof}
+    Let \( B \in \mathcal{A} \) and \( E \subseteq X \). For any \(
+    \varepsilon > 0 \), we can find \( A_{i} \in \mathcal{A} \) such that \(
+    E \subseteq \cup_{i = 1}^{\infty} A_{i} \) and \( \mu(E) + \varepsilon
+    \geq \sum_{i = 1}^{\infty} \nu(A_{i}) \). We then have that
+    \begin{align*}
+        \mu(E) + \varepsilon
+        &\geq \sum_{i = 1}^{\infty} \nu(A_{i})\\
+        &= \sum_{i = 1}^{\infty} \left( \nu(A_{i} \cap B) + \nu(A_{i}
+        \cap B^c) \right)\\
+        &\geq \mu(E \cap B) + \mu(E \cap B^c),
+    \end{align*}
+    which proves that \( B \) is \(\mu\)-measurable.
+\end{proof}
+%}}}
+
+%{{{
+\begin{proposition}
+    Let \( \nu \) be a \( \sigma \)-finite pre-measure and \(\mu\) is the
+    induced measure. If \( \rho \) is extension of \(\nu\) (i.e. \(
+    \rho \big\vert_{\mathcal{A}} = \nu \)), then \( \mu = \rho \).
+\end{proposition}
+\begin{proof}
+    Let \( E \in \mathcal{F}_{\mu} \), \( E \subseteq \cup_{i = 1}^{\infty}
+    A_{i} \), \( A_{i} \in \mathcal{A} \). Then
+    \begin{displaymath}
+        \rho(E) \leq \sum_{i = 1}^{\infty} \rho(A_{i}) = \sum_{i =
         1}^{\infty}
-        I_{j}\). Now let \( B_{n} = E \cap (I_{n} \setminus \cup_{j = 1}^{n - 1}
-        I_{j}) \) which disjointly cover \(E\). We then get
-        \begin{displaymath}
-            \nu(E) = \sum_{i = 1}^{\infty} \nu(B_{i}) \leq \sum_{i = 1}^{\infty}
-            \nu(I_{i}).
-        \end{displaymath}
-        If we take the infimum over any such sets \( I_{j} \), we have that \(
-        \nu(E) \leq \mu(E) \).
+        \nu(A_{i})
+    \end{displaymath}
+    so \( \rho(E) \leq \mu(E) \).
 
-        Since \( E \subseteq E \), we already have that \( \mu(E) \leq
-        \nu(E) \). Thus, \( \nu \restrict_{\mathcal{A}} = \mu
-        \restrict_{\mathcal{A}} \).
-    \end{proof}
-    %}}}
-
-    %{{{
-    \begin{prop}
-        Let \( \mathcal{A} \) be the set of finite unions of half-open
-        intervals. Then for any \(\mu\), all the sets in \( \mathcal{A} \) are
-        \(\mu\)-measurable.
-    \end{prop}
-    \begin{proof}
-        Let \( B \in \mathcal{A} \) and \( E \subseteq X \). For any \(
-        \varepsilon > 0 \), we can find \( A_{i} \in \mathcal{A} \) such that \(
-        E \subseteq \cup_{i = 1}^{\infty} A_{i} \) and \( \mu(E) + \varepsilon
-        \geq \sum_{i = 1}^{\infty} \nu(A_{i}) \). We then have that
-        \begin{align*}
-            \mu(E) + \varepsilon
-            &\geq \sum_{i = 1}^{\infty} \nu(A_{i})\\
-            &= \sum_{i = 1}^{\infty} \left( \nu(A_{i} \cap B) + \nu(A_{i}
-            \cap B^c) \right)\\
-            &\geq \mu(E \cap B) + \mu(E \cap B^c),
-        \end{align*}
-        which proves that \( B \) is \(\mu\)-measurable.
-    \end{proof}
-    %}}}
-
-    %{{{
-    \begin{prop}
-        Let \( \nu \) be a \( \sigma \)-finite pre-measure and \(\mu\) is the
-        induced measure. If \( \rho \) is extension of \(\nu\) (i.e. \(
-        \rho \restrict_{\mathcal{A}} = \nu \)), then \( \mu = \rho \).
-    \end{prop}
-    \begin{proof}
-        Let \( E \in \mathcal{F}_{\mu} \), \( E \subseteq \cup_{i = 1}^{\infty}
-        A_{i} \), \( A_{i} \in \mathcal{A} \). Then
-        \begin{displaymath}
-            \rho(E) \leq \sum_{i = 1}^{\infty} \rho(A_{i}) = \sum_{i =
-            1}^{\infty}
-            \nu(A_{i})
-        \end{displaymath}
-        so \( \rho(E) \leq \mu(E) \).
-
-        Since \( \rho \) is \(\sigma\)-finite,
-        we need only to prove that they concide on finitely-measurably sets. As such, let \( \mu(E) < \infty
-        \). Now let \( A_{i} \in \mathcal{A} \) and \( E \subseteq A = \cup_{i
-        = 1}^{\infty} A_{i}
-        \) where \( \mu(A \Delta E) < \varepsilon \). We first see that
-        \begin{displaymath}
-            \rho(A) = \lim_{n \to \infty} \rho(\cup_{i = 1}^{n} A_{i})
-            = \lim_{n \to \infty} \mu(\cup_{i = 1}^{n} A_{i}) = \mu(A).
-        \end{displaymath}
-        Since \( A \setminus E \subseteq A \Delta E \), we get that
-        \begin{displaymath}
-            \mu(E) \leq \mu(A) = \rho(A)
-            = \rho(E) + \rho(A \setminus E)
-            = \rho(E) + \mu(A \setminus E)
-            = \rho(E) + \varepsilon.
-        \end{displaymath}
-        This proves that \( \mu(E) \leq \rho(E) + \varepsilon \) as we wanted.
-    \end{proof}
+    Since \( \rho \) is \(\sigma\)-finite,
+    we need only to prove that they concide on finitely-measurably sets. As such, let \( \mu(E) < \infty
+    \). Now let \( A_{i} \in \mathcal{A} \) and \( E \subseteq A = \cup_{i
+    = 1}^{\infty} A_{i}
+    \) where \( \mu(A \Delta E) < \varepsilon \). We first see that
+    \begin{displaymath}
+        \rho(A) = \lim_{n \to \infty} \rho(\cup_{i = 1}^{n} A_{i})
+        = \lim_{n \to \infty} \mu(\cup_{i = 1}^{n} A_{i}) = \mu(A).
+    \end{displaymath}
+    Since \( A \setminus E \subseteq A \Delta E \), we get that
+    \begin{displaymath}
+        \mu(E) \leq \mu(A) = \rho(A)
+        = \rho(E) + \rho(A \setminus E)
+        = \rho(E) + \mu(A \setminus E)
+        = \rho(E) + \varepsilon.
+    \end{displaymath}
+    This proves that \( \mu(E) \leq \rho(E) + \varepsilon \) as we wanted.
+\end{proof}
 
 
 \subsection{Properties of the Lebesgue and Lebesgue-Stieltjes measures}
