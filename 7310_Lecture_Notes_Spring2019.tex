@@ -15,6 +15,7 @@
 \usepackage[mathscr]{euscript}
 
 \usepackage{hyperref}
+\usepackage{cleveref}
 
 \usepackage{amsthm} 
 \usepackage{tikz-cd}
@@ -315,6 +316,7 @@ We now begin the proof of the
 Caratheodory's extension theorem:
 
 \begin{theorem}[Caratheodory]
+	\label{thm:Caratheodory}
 Let $\mu$ be an outer measure on a set $X$, then the following statements are true:
 
 1) $\mathscr{F} = \{A\colon \textnormal{$A$ is a $\mu$-measurable set}\}$ is a $\sigma$-algebra;
@@ -369,6 +371,61 @@ we say that a set \( A \) is
 \end{displaymath}
 Note that in the proofs we need only to check \( \geq \) since \( \leq \) follows directly
 from subadditivity.
+Denote by $\mathscr{F}$ the set of all $\mu$-measurable subsets.
+
+\begin{proof}[Rest of the proof of Caratheodory theorem (\Cref{thm:Caratheodory})]
+	We have shown in Lecture 2 that $\mathscr{F}$ is an algebra (closed under finite unions,
+	intersections, and complements) and that $\mu$ is finitely additive on $\mathscr{F}$.
+
+	Now we need to show that $\mathscr{F}$ is a $\sigma$-algebra. Let $A_1,A_2,\ldots\in \mathscr{F} $
+	be disjoint, and define $B_n=\bigsqcup_{j=1}^{n}A_j$.
+	We know that $B_n\in \mathscr{F}$,
+	so we need to show that $B=\bigcup_{n=1}^{\infty}B_n\in \mathscr{F}$.
+
+	First, for all $E\subseteq X$, we have
+	\begin{equation*}
+		\mu(E\cap B_n)=\mu(E\cap B_n\cap A_n)+\mu(E\cap B_n\cap A_n^c)
+		=
+		\mu(E\cap A_n)+\mu(E_\cap B_{n-1}).
+	\end{equation*}
+	Continuing this, we see that 
+	\begin{equation*}
+		\mu(E\cap B_n)=\sum_{i=1}^{n}\mu(E\cap A_i).
+	\end{equation*}
+	Thus, 
+	\begin{equation*}
+		\mu(E)=\mu(E\cap B_n)+\mu(E\cap B_n^c)\ge \sum_{i=1}^{n}\mu(E\cap A_i)+\mu(E\cap B^c).
+	\end{equation*}
+	The last inequality is due to the fact that in the second summand 
+	we have passed to the smaller set $E\cap B$.
+	In the previous inequality we can now pass to $n\to\infty$, and all the sums in the 
+	right-hand side are bounded:
+	\begin{equation*}
+		\mu(E)\ge \sum_{i=1}^{\infty}\mu(E\cap A_i)+\mu(E\cap B^c).
+	\end{equation*}
+	By subadditivity, this is 
+	\begin{equation*}
+		\ge \mu\left( \bigcup_{i=1}^{\infty}(E\cap A_i) \right)+\mu(E\cap B^c)
+		=\mu(E\cap B)+\mu(E\cap B^c).
+	\end{equation*}
+	This shows that $B\in \mathscr{F}$, so $\mathscr{F}$ is a $\sigma$-algebra.
+
+	The $\sigma$-additivity of $\mu$ on $\mathscr{F}$ is straightforward, take $B=E$ in the previous
+	argument, which leads to $\mu(B)=\sum_{i=1}^{\infty}\mu(A_i)$.
+
+	Finally, to show completeness, let $A\subseteq X$ be with the outer measure $\mu(A)=0$.
+	We want to show that $A\in \mathscr{F}$.
+	We have for all $E\subseteq X$:
+	\begin{equation*}
+		\mu(E)\le \mu(E\cap A)+\mu(E\cap A^c)=\mu(E\cap A^c)\le \mu(E)
+	\end{equation*}
+	because the outer measure is subadditive and so $\mu(E\cap A)=0$.
+	The last inequality is also due to subadditivity.
+	This implies that $\mu(E)=\mu(E\cap A)+\mu(E\cap A^c)$, 
+	so $E\in \mathscr{F}$.
+\end{proof}
+
+\subsection{From pre-measure to outer measure}
 
 
 
