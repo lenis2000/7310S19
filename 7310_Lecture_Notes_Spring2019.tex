@@ -427,7 +427,47 @@ Denote by $\mathscr{F}$ the set of all $\mu$-measurable subsets.
 
 \subsection{From pre-measure to outer measure}
 
+Recall the definition of a pre-measure:
 
+\begin{definition}[Pre-measure]
+    Let \( X \) be a set and let \( \mathcal{E} \) be a set of subsets of \(
+    X \). Then any function \( \nu : \mathcal{E} \to [0, \infty] \) is
+    called a \emph{pre-measure}.
+\end{definition}
 
+\begin{proposition}
+    If \( \nu \) is a pre-measure, then $\mu$ defined by 
+    \begin{displaymath}
+        \mu(E) = \inf \left\{ \sum_{i = 1}^{\infty} \nu(A_{i}) : A_{i}
+        \in \mathcal{E}, E \subseteq \cup_{i = 1}^{\infty} A_{i}  \right\}
+    \end{displaymath}
+    is an outer measure on \( \mathcal{E} \).
+\end{proposition}
+\begin{proof}
+    We need only prove the subadditivity of $\mu$. Let \( F \subseteq
+    \cup_{i = 1}^{\infty} F_{i} \) and let \( \varepsilon > 0 \). By
+    construction of \(\mu\), there are sets \( A_{i}^{n} \) such that \(
+    F_{i} \subseteq \cup_{n = 1}^{\infty} A_{i}^{n} \) and
+    \begin{displaymath}
+        \mu(F_{i}) + \frac{\varepsilon}{2^{i}} \geq \sum_{n = 1}^{\infty}
+        \nu(A_{i}^{n}).
+    \end{displaymath}
+    We also note that
+    \begin{displaymath}
+        F \subseteq \bigcup_{i = 1}^{\infty} F_{i} \subseteq\bigcup_{i =
+        1}^{\infty} \bigcup_{n = 1}^{\infty} A_{i}^{n}.
+    \end{displaymath}
+    This means
+    \begin{displaymath}
+        \mu(F)
+        \leq \mu\left(\bigcup_{i = 1}^{\infty} \bigcup_{n = 1}^{\infty}
+        A_{i}^{n}\right)
+        \leq \sum_{i = 1}^{\infty} \sum_{n = 1}^{\infty} \mu(A_{i}^{n})
+        \leq \sum_{i = 1}^{\infty} \left( \mu(F_{i}) + \frac{\varepsilon}{2^{i}}
+        \right).
+    \end{displaymath}
+    As we can make \(\varepsilon\) as small as we'd like, this implies that \(
+    \mu(F) \leq \sum_{i = 1}^{\infty} \mu(F_{i}) \) as we wanted.
+\end{proof}
 
 \end{document}
