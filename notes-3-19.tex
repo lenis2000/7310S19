@@ -1,0 +1,120 @@
+\documentclass{../uva7310}
+
+\begin{document}
+
+\section{March 19}
+
+Review:
+\begin{enumerate}
+    \item Measure and integral
+    \item Radon Nikodym derivatives
+    \item Stone-Weierstrass
+\end{enumerate}
+
+Let $(X,F,\mu)$ be a measure space. Then we also have $L^p$ and $L^\infty$ norms. The $L^p$ space is defined as
+$L^p=\{F-\text{measureable functions}, f:X\rightarrow\RR: |f|^p\in L^1\}$. (To do : $1\leq p<q\leq\infty$ implies $L^q\subseteq L^p$)
+Consider $\frac{1}{x}$ on $[0,1]$. 
+
+Suppose $\mu(X)<\infty$, then $L^\infty$ is defined as $L^\infty=\{\text{ess}\sup |f|<\infty\}$ where
+$\text{ess}\sup=\sup\{a:\exists\varepsilon>0,\;\mu(|f|^{-1}(a-\varepsilon,a+\varepsilon))>0\}$. This includes bounded a.e..
+
+Let $V$ be a vector space, $||\cdot||:V\rightarrow\RR_{\geq0}$ be a function so that
+\begin{itemize}
+    \item $||x||=0\Rightarrow x=0$
+    \item $||\lambda x||=|\lambda| ||x||$
+    \item $||x+y||\leq ||x||+||y||$
+\end{itemize}
+Then $(V,||\cdot||)$ is a \textit{normed vector space}.
+
+Define $||f||_p=\left(\int|f|^p\right)^{1/p}$ and $||f||_\infty = \text{ess}\sup |f|$. We need to show that these are
+norms. The triangle inequality for $||f||_p$ is called the \textit{Minkowski inequality}.
+
+A normed space is $\textit{Banach}$ if it is complete with respect to the metric $\rho(x,y)=||x-y||$ where $||\cdot||$
+is the norm.
+
+To do: $p>1$ implies $L^p$ is Banach.
+
+Not the case that $L^p$ Banach for $p\leq 1$ under usual metric. For example with $p=1/2$, $(\sqrt{x}+\sqrt{y})^2=x+y+2\sqrt{xy}\not\geq x+y$.
+
+Exercise: $||f-g||_p^p$ defines a metric.
+
+If $(V,||.||)$ is a normed vector space, then if $V=\RR^n$, then all norms are equivalent (topologically). That is, there exists a $c>0$ such that for
+all $x$, $c^{-1}||x||_2\leq ||x||_1\leq c||x||_2$. To prove, look at $\min_i/\max_i ||e_i||$ where $(e_i)$ is a basis of $\RR^n$.
+
+When $X$ is the 2 point space under counting measure, $||(x,y)||_p= (|x|^p+|y|^p)^{1/p}\leq 1$ (see diagram). $p=2$, circle, $p=1$ diamond,
+as $p$ grows, we get closer to a square with $p=\infty$ giving us a square (with max norm). When $p<1$, we get a crushed diamond.
+
+Def: LEt $V$ and $W$ be vector spaces and let $T:V\rightarrow W$ be a linear operator. Then $||T||=\sup_{v\neq 0} \frac{||Tv||_W}{||v||_V}$.
+If $||T||<\infty$, then $T$ is \textit{bounded}.
+
+In finite dimensions, all operators are bounded.
+
+Examples of operators: 
+
+$V=\{(x_n)_{n\in\NN}: \left(\sum x_n^2\right)^{1/2}\}$, $T((x_n))=(nx_n)$.
+
+
+$V=C^1([0,1])$, $W=C$, $T=\frac{d}{dx}:C^1\rightarrow C$ which is a dense domain. But $T$ is not bounded. Really just not always defined.
+
+To get a truly unbounded operator, need axiom of choice (e.g. it is a myth). Take bases of $V$ and $W$, Banach spaces, $(e_\alpha)$,
+$(f_\beta)$. Take subcollection $(e_i)\subseteq (e_\alpha)$ and map $e_i\mapsto ie_i$.
+
+An operator is bounded iff it is continuous since $||T(v+h)-T(v)||=||T(h)||\leq ||T||\cdot ||h||$.
+
+Given $V$, take $V^*$ to be the dual space (the space of bounded functionals on $V$) and give it the operator norm.
+
+Def: A set $A\subseteq \RR^d$ is convex if for all $x,y\in A$, then for all $\alpha\in[0,1]$ $\alpha x+(1-\alpha)y\in A$.
+
+Exercise: All convex sets are Borel measureable. (its true in $\RR^1$; slice $A$ into $A_{x_1}\subseteq\RR^{d-1}$ for fixed $x_1$)
+
+Def: A function $f$ is convex if the epigraph, $\{(x,y):y\geq f(x)\}$ is convex. That is, if $f(\alpha x+(1-\alpha) y)\leq \alpha f(x)+(1-\alpha) f(y)$
+for all $x,y$ and $\alpha\in[0,1]$. Alternatively, if for all $x,y,z$ with $x<y<z$ then $\frac{f(z)-f(y)}{z-y}\geq \frac{f(y)-f(x)}{y-x}$.
+
+We now want to show that convex implies continuous. Suppose $f:\RR\rightarrow\RR$ and $x_2<x<y<x_1$. Then 
+\[
+    \frac{f(x_1)-f(y)}{x_1-y}\geq\frac{f(y)-f(x)}{y-x}\geq \frac{f(y)-f(x_2)}{y-x_2}
+\]
+and slopes increase in $x$ and are bounded. Ergo, it converges as $x\to y$ and $f$ is continuous with directional derivatives.
+If $f:\RR^d\rightarrow\RR$ then $g(t)=f(x+tv)$ is convex in $t$ and is thus has directional derivatives.
+Ergo, $D_v^\pm = \lim_{t\to 0\pm} \frac{f(x+tv)-f(x)}{t}$ and $f$ is continuous.
+
+Since convex functions are continuous, they are Borel measureable.
+
+Recall that if $f:X\rightarrow R$ we can push forward $\mu$ to $\RR$ with $f_*\mu$.
+
+Jensen's inequality: If $f\in L^1(X,F,\mu)$ with $\mu(X)<\infty$ and $\varphi:\RR\rightarrow\RR$ is convex then
+\[
+    \varphi\left(\frac{1}{\mu(X)}\int fd\mu\right)\leq \frac{1}{\mu(X)}\int \varphi(f(x))\mu(dx).
+\]
+\begin{proof}
+    Let $E=\frac{1}{\mu(X)}\int fd\mu$ and $\beta=D^-\varphi(E)=\lim_{\varepsilon\to 0-}\frac{\varphi(E+\varepsilon)-varphi(E)}{\varepsilon}\leq D^+\varphi(E)$.
+    Then $\varphi(s)-\varphi(E)\geq \beta(s-E)$. Ergo, $\varphi(f(x))-\varphi(E)\geq\beta(f(x)-E)$. Thus, $\frac{1}{\mu(X)}\int d\mu(x)\geq 0$.
+\end{proof}
+
+Cor:
+\begin{enumerate}
+    \item Young inequality: If $\varphi(t)=e^t$ and $\mu(X)=1$ then $e^{\int f}\leq \int e^f$.
+    \item AMGM inequality: Take $X=\{1,\ldots, n\}$ with corresponding measures $\alpha_1,\ldots,\alpha_n>0$ with $\sum a_i=1$.
+    Then $y_i=e^{f(i)}\geq 0$ and $\prod y_i^{\alpha_i} \leq \sum \alpha_i y_i$.
+\end{enumerate}
+
+Overview
+
+Normed spaces, Banach spaces, bdd operators
+
+Convexity
+
+$L^p$, $L^\infty$
+
+Goals:
+
+$L^q\subseteq L^p$ when $q>p>1$, Banach, $(L^p)^*$.
+
+Jensen, (H\"older, Minkowski).
+
+Suppose $f\in L^1\mapsto T(f)\in\RR$. Then $T(f)=\int f d\mu$ is an example of a functional. We can also have $T_A(f)=\int 1_A f$.
+Can take $T_g(f)=\int f\bar{g} d\mu$ for $g\in L^\infty$.
+
+We will see that $(L^1)^*=L^\infty$, but $(L^\infty)^*$.
+
+\end{document}
