@@ -927,7 +927,7 @@ which are functions on $Y$ and $X$, respectively.
 		\#A, & \textnormal{if $A$ is finite}; \\
 		\infty, & \textnormal{else}.
 	\end{array}\right.$$  
-	And let $$f(x,y)=1_{x=y}.$$
+	And let $$f(x,y)=\mathbf{1}_{x=y}.$$
 	Then 
 	\begin{align*}
 		\int f(x,y) dx&=0 \ \forall y;\\
@@ -975,37 +975,48 @@ result for Lebesgue to various situations, such as
 The Borel-Cantelli Lemma is a very powerful tool in probability theory and 
 analysis in general.
 
-Let $E_{n}$ be sets, and let $E=\limsup \ E_n = E_{n} \ i.o.$
+Let $E_{n}$ be measurable sets, and let $E=\limsup E_n = E_{n} \ i.o.$,
+that is, $x\in E$ iff $x$ belongs to infinitely many of the $E_n$'s.
 
-\begin{theorem}
-	if $\sum_{n=1}^{\infty} \mu(En) < \infty$ then $\mu(E)=0$.
+\begin{theorem}[Borel-Cantelli 1]
+	If $\sum_{n=1}^{\infty} \mu(E_n) < \infty$, then $\mu(E)=0$.
 \end{theorem}
-
 \begin{proof}
-	Let $$f=\sum_{n=1}^{\infty}1_{E_n}, f_N=\sum_{1}^{N}1_{E_n} \ then \ f_N\rightarrow f$$
-	also for $$x\in \limsup{E_n} \Leftrightarrow f(x)=\infty$$
- Hence by monotone convergent theorem, 
-	$$\int f = \sum_{1}^{\infty} \mu(1_{E_n})<\infty \Rightarrow \mu(x:f(x)=\infty)=0$$.
+	Let 
+	$$f=\sum_{n=1}^{\infty}\mathbf{1}_{E_n},\qquad  f_N=\sum_{1}^{N}\mathbf{1}_{E_n}.$$
+	Then $f_N\rightarrow f$ monotonically.
+	Also, $x\in \limsup{E_n} \Leftrightarrow f(x)=\infty$.
+	Hence by the monotone convergence theorem, we have
+	$\int f = \sum_{1}^{\infty} \mu(\mathbf{1}_{E_n})<\infty$, which implies that 
+	$\mu(x:f(x)=\infty)=0$, and this is the desired claim.
 \end{proof}
 
-\begin{theorem}
-	The converse of Borel-Cantelli: Suppose $\mu(X)=1$, $E_n$ are independent which means
-	 $\mu(\cap_{i\in I} E_i)=\prod_{i\in I} \mu(E)$. Then $\forall$ finite $I\in \mathbb{N}$, if $\sum \mu(E_n)=\infty \rightarrow \mu(E_n \ i.o.)=1$
+\begin{theorem}[Borel-Cantelli 2; the converse statement]
+	Suppose $\mu(X)=1$, and the sets $E_n$ are independent which means
+	$\mu(\cap_{i\in I} E_i)=\prod_{i\in I} \mu(E)$ for any finite subcollection $I$.
+	If
+	$\sum \mu(E_n)=\infty$, then  $\mu(E_n \ i.o.)=1$.
 \end{theorem}
-\begin{proposition}
-	Let's look at some applications of Borel-caintelli theorem
-	\begin{enumerate}
-		\item Suppose you are tossing coins, $X_n=\left\{\begin{array}{cc}
-		 1 & with \ probability \ \frac{1}{n^2} \\
-		 0 & with \ probability \ 1-\frac{1}{n^2}
- 		\end{array}\right.$\\
- 		Then $P(infinit \ many \ 1's)=0$  
- 		
- 		\item let $f_n$ be a sequence of measurable functions on $[0,1)$, and $|f_n(x)|<\infty$ a.e, then $\exists$ $C_n>0$ s.t. $\frac{f_n(x)}{C_n} \rightarrow 0$ a.e.
-	\end{enumerate}
-\end{proposition}
+We do not give a proof of this second theorem
+in the course.
+Let's look at some applications of Borel-Cantelli theorem.
+\begin{enumerate}
+	\item Suppose you are tossing independent coins, 
+		$X_n=0$ with probability $1-1/n^2$,
+		and $X_n=1$ with probability $1/n^2$.
+		Then $P(\textnormal{infinitely many $1$'s})=0$.
+	
+	\item Let $f_n$ be a sequence of measurable functions on $[0,1]$, and $|f_n(x)|<\infty$ a.e.
+		Then $\exists$ $C_n>0$ s.t. $\frac{f_n(x)}{C_n} \rightarrow 0$ a.e.
+		This is an exercise.
+\end{enumerate}
 
 \section{February 14, 2019}
+
+This class was a brainstorming session 
+on various modes of convergence. 
+We started with definitions, and then 
+came up with implications and counterexamples.
 
 \subsection{Modes of convergence}
 
@@ -1056,10 +1067,10 @@ Let $f_n$ be a sequence of measurable function on $(X,\mathbb{F},\mu)$. Then the
 
 Here are some typical example of different modes of convergence.
 \begin{enumerate}[(1)]
-\item $f_n=n^{-1}1_{(0,n)}$
-\item $f_n=1_{(n,n+1)}$
-\item $f_n=n1_{[0,1/n]}$
-\item $f_n=1_{[j/2^k,(j+1)/2^k]}$ where $n=2^k+j$ with $0\leq j<2^k$
+\item $f_n=n^{-1}\mathbf{1}_{(0,n)}$
+\item $f_n=\mathbf{1}_{(n,n+1)}$
+\item $f_n=n\mathbf{1}_{[0,1/n]}$
+\item $f_n=\mathbf{1}_{[j/2^k,(j+1)/2^k]}$ where $n=2^k+j$ with $0\leq j<2^k$
 \end{enumerate}
 
 Then in(1), (2), and (3), $f_n \rightarrow 0$ uniformly, pointwise and a.e respectively, but they are not converge in $L^1$.In (4) $f_n \rightarrow 0$ in $L^1$ but not pointwise/a.e.
