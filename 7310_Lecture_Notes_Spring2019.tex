@@ -885,10 +885,16 @@ containing $\mathscr{E}$.
 \subsection{Fubini 2}
 
 Here we prove the general Fubini Theorem (called ``Fubini 2'' --- recall that ``Fubini 1'' was for
-indicators).
+indicators). Our setup is that we consider the product $\sigma$-algebra 
+$\mathscr{F}\times \mathscr{G}$ on $X\times Y$, and the product
+measure $\mu\times \nu$ on it. Recall that we don't use completion of
+$\mathscr{F}\times \mathscr{G}$.
+For a set $E\subset X\times Y$,
+the product measure is given by $\mu \times \nu (E) = \int \int \mathbf{1}_{E}\, d\mu\times\nu$.
+
 
 \begin{theorem}
-	Suppose $X,Y$ are $\sigma-finite$, and $\mu \times \nu (E) = \int \int 1_{E} d\mu\times\nu$.
+	Suppose the measures $X,Y$ are $\sigma$-finite.
 	\begin{enumerate}[a)]
 		\item For $f\geq 0$ and measurable $\Rightarrow g(x)=\int f_x d\nu, h(x)=\int f^y d\mu$ are measurable, and $\int\int f d\mu \times \nu = \int_{X} g d\mu = \int_{Y} h d\nu.$
 		\item If $f\in L^{1}(\mu \times \nu) \Rightarrow g\in L^{1}(\mu)$ and $\int\int f d\mu \times \nu = \int_{X} g d\mu$
