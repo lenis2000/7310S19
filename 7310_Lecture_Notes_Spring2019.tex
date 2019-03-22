@@ -890,51 +890,90 @@ $\mathscr{F}\times \mathscr{G}$ on $X\times Y$, and the product
 measure $\mu\times \nu$ on it. Recall that we don't use completion of
 $\mathscr{F}\times \mathscr{G}$.
 For a set $E\subset X\times Y$,
-the product measure is given by $\mu \times \nu (E) = \int \int \mathbf{1}_{E}\, d\mu\times\nu$.
+the product measure is given by $\mu \times \nu (E) = \iint  \mathbf{1}_{E}\, d\mu\times\nu$.
 
+Recall that for a function $f(x,y)$ on $X\times Y$ we denote by 
+$f_x(y)=f(x,y)$ and $f^y(x)=f(x,y)$ the slices
+which are functions on $Y$ and $X$, respectively.
 
 \begin{theorem}
-	Suppose the measures $X,Y$ are $\sigma$-finite.
+	Suppose the measures $\mu,\nu$ on $X,Y$ are $\sigma$-finite.
 	\begin{enumerate}[a)]
-		\item For $f\geq 0$ and measurable $\Rightarrow g(x)=\int f_x d\nu, h(x)=\int f^y d\mu$ are measurable, and $\int\int f d\mu \times \nu = \int_{X} g d\mu = \int_{Y} h d\nu.$
-		\item If $f\in L^{1}(\mu \times \nu) \Rightarrow g\in L^{1}(\mu)$ and $\int\int f d\mu \times \nu = \int_{X} g d\mu$
+	\item For $f\geq 0$, $\mathscr{F}\times\mathscr{G}$-measurable,
+		the functions $g(x)=\int f_x d\nu, h(x)=\int f^y d\mu$ are measurable, and
+		$\iint f d\mu \times \nu = \int_{X} g d\mu = \int_{Y} h d\nu.$
+	\item $f\in L^{1}(\mu \times \nu) \Rightarrow g\in L^{1}(\mu)$ 
+		and $\iint f d\mu \times \nu = \int_{X} g d\mu$.
 	\end{enumerate}
-
-\begin{proof}
-	\begin{enumerate}[a)]
-		\item Use the monotone convergent theorem and the fact that every function can be approximated by simple functions, and Fubini 1. 
-		\item Use $f=f^{+}-f^{-}$		
-	\end{enumerate}
-\end{proof}
 \end{theorem}
+\begin{proof}
+	The theorem has two parts, first for nonnegative functions
+	(when both sides might be $+\infty$), 
+	and second for integrable functions.
+
+	For a), use the monotone convergent theorem
+			and the fact that every function can be monotonically
+			approximated by simple functions, and Fubini 1. 
+	For b), express $f=f^{+}-f^{-}$.
+\end{proof}
 \begin{remark}
-	Here is a counterexample for Fubini when the measure is not $\sigma-finite$.\\	
-	Let $X=([0,1],\ell)$, $Y=([0,1],counting \ measure)$, where the counting measure $$\nu(A) = \left\{  
-	\begin{array}{cc}
-	\#A & if \ finite \\
-	\infty & else
+	Here is a counterexample for Fubini when the measure is not $\sigma$-finite.
+	Let $X=[0,1]$ with $\ell$, the Lebesgue measure, 
+	and
+	$Y=[0,1]$
+	with the counting measure $\nu$:
+	$$\nu(A) = \left\{  
+	\begin{array}{ll}
+		\#A, & \textnormal{if $A$ is finite}; \\
+		\infty, & \textnormal{else}.
 	\end{array}\right.$$  
-	And let $$f(x,y)=1_{x=y}$$ \\
-	Then $$\int f(x,y) dx=0 \ \forall y, \int d\nu(y)=0$$
-	$$\int f(x,y) \nu(dy) = 1 \ \forall x, \int dx=1$$\\ 
-	However $$\int\int f dxd\nu(y)=\infty$$ which contradicts the Fubini.
+	And let $$f(x,y)=1_{x=y}.$$
+	Then 
+	\begin{align*}
+		\int f(x,y) dx&=0 \ \forall y;\\
+		\int f(x,y) \nu(dy)& = 1 \ \forall x.
+	\end{align*}
+	However, $$\iint f dxd\nu(y)=\infty.$$
+	Therefore, all 3 integrals
+	(the double integral and both repeated single integrals)
+	differ.
 \end{remark}
 
 \subsection{Change of Variables}
 
+Next we discuss a number of isolated applications of integration / Fubini.
+The first one is the change of variables formula.
+
 \begin{definition}
-	For $(X,\mathbb{F},\mu)$, $(Y,\mathbb{G})$, let $\phi : X\rightarrow Y$ be a measurable function. Then the push-forward $\phi_{*}\mu$ is a measure on $(Y,\mathbb{G})$ such that $(\phi_{*}\mu)(E)=\mu(\phi^{-1}(E))$ for $E\in X$.
+	For $(X,\mathscr{F},\mu)$, $(Y,\mathscr{G})$, 
+	let $\phi : X\rightarrow Y$ be a measurable function. 
+	Then the push-forward $\phi_{*}\mu$ is a measure on $(Y,\mathscr{G})$ 
+	such that $(\phi_{*}\mu)(E)=\mu(\phi^{-1}(E))$ for $E\in \mathscr{G}$.
 \end{definition}
 
 \begin{theorem}
-	For a function $f:Y\rightarrow [0,\infty]$
-	\begin{enumerate}
-		\item $\int_{X} (f\circ \phi)(x) d\mu(x) = \int_{Y} f(y) d(\phi_{*}\mu)$
-		\item $\int\int f(y) d\mu(x\times y) = \int_{Y} f(y) d(\phi_{*}\mu)$
-	\end{enumerate}
+	For a function $f:Y\rightarrow [0,\infty]$ or $f\in L^1(\mu_*\phi)$, we have
+	\begin{equation*}
+		\int_{X} (f\circ \phi)(x) d\mu(x) = \int_{Y} f(y) d(\phi_{*}\mu).
+	\end{equation*}
 \end{theorem}
 
-\subsection{Borel-Caintelli}
+It is illustrative to consider the applications of the change of variables
+result for Lebesgue to various situations, such as
+\begin{enumerate}[1.]
+	\item The case when the function $f(x,y)$ on $[0,1]^2$ (with Lebesgue measure)
+		depends only on one variables $y$; then the change of variables formula
+		is related to the Fubini's theorem;
+	\item How this result is related to the change of variables formula
+		from calculus which involves the absolute value of the Jacobian;
+	\item How the push-forward of a measure can be used to define the length
+		measure on curves.
+\end{enumerate}
+
+\subsection{Borel-Cantelli Lemma}
+
+The Borel-Cantelli Lemma is a very powerful tool in probability theory and 
+analysis in general.
 
 Let $E_{n}$ be sets, and let $E=\limsup \ E_n = E_{n} \ i.o.$
 
@@ -950,7 +989,7 @@ Let $E_{n}$ be sets, and let $E=\limsup \ E_n = E_{n} \ i.o.$
 \end{proof}
 
 \begin{theorem}
-	The converse of Borel-Caintelli: Suppose $\mu(X)=1$, $E_n$ are independent which means
+	The converse of Borel-Cantelli: Suppose $\mu(X)=1$, $E_n$ are independent which means
 	 $\mu(\cap_{i\in I} E_i)=\prod_{i\in I} \mu(E)$. Then $\forall$ finite $I\in \mathbb{N}$, if $\sum \mu(E_n)=\infty \rightarrow \mu(E_n \ i.o.)=1$
 \end{theorem}
 \begin{proposition}
