@@ -1020,60 +1020,104 @@ came up with implications and counterexamples.
 
 \subsection{Modes of convergence}
 
-Let $f_n$ be a sequence of measurable function on $(X,\mathbb{F},\mu)$. Then there are many ways to define the convergence of $f_n$ as $n\rightarrow \infty$
+Let $f_n$ be a sequence of measurable functions on $(X,\mathscr{F},\mu)$. Then there are many ways to define the convergence of $f_n$ as $n\rightarrow \infty$.
 
-\begin{enumerate}[1)]
-	\item pointwise/a.e. $\forall x$, $f_n(x)\rightarrow f(x)$ / a.e.
-	\item uniform. $\forall \epsilon>0$, $|f_n(x)-f(x)|<\epsilon$ $\forall x, n>>1$.
-	\item $L^1$. $\int |f_n-f| \rightarrow 0$.
-	\item A.e.uniform. $\exists X_0\subset X,\mu(X\setminus X_0)=0$, s.t $\sup_{x\in X_0} |f_n(x)-f(x)|\rightarrow 0$
-	\item Almost uniform. $\forall \epsilon>0, \exists X_{\epsilon}\subset X, \mu(X_{\epsilon}^{c})<\epsilon$ s.t. $f_n \rightarrow f$ uniform on $X_{\epsilon}$.
-	\item Convergent in measure. $\forall \epsilon>0, \mu(x:|f_n(x)-f(x)|\rightarrow 0$
-	
-\begin{remark}
-	\begin{enumerate}[(a)]
-		\item convergence in measure has metric $\rho(f,g)=\int \frac{|f-g|}{1+|f-g|}$
-		\item uniform $\Rightarrow$ point wise $\Rightarrow$ a.e.
-		\item uniform $\Rightarrow$ a.e. uniform $\Rightarrow$ almost uniform.
-		\item uniform $\nLeftrightarrow L^1$
-		\item a.e $\nLeftrightarrow L^1$
-	\end{enumerate}
-\end{remark}
+\begin{enumerate}[1.]
+	\item Pointwise/a.e., $f_n(x)\rightarrow f(x)$ for all or $\mu$-almost all $x$.
+	\item Uniform, $\forall \epsilon>0$, $|f_n(x)-f(x)|<\epsilon$ for all sufficiently large $n$
+		and all $x$ (and the bound on $n$ depends only on $\epsilon$ and not on $x$).
+		In other words, $\sup_{x}|f_n(x)-f(x)|\to0$.
+	\item $L^1$ convergence, $\int |f_n-f| \rightarrow 0$.
+	\item A.e. uniform, $\exists X_0\subset X,\mu(X\setminus X_0)=0$, such that
+		$\sup_{x\in X_0} |f_n(x)-f(x)|\rightarrow 0$.
+	\item Almost uniform, $\forall \epsilon>0, 
+		\exists X_{\epsilon}\subset X, \mu(X_{\epsilon}^{c})<\epsilon$ such that $f_n \rightarrow f$ uniformly on $X_{\epsilon}$, that is, $\sup_{x\in X_\epsilon}|f_n(x)-f(x)|\to0$.
+	\item Convergence in measure, $\forall \epsilon>0, \mu(x:|f_n(x)-f(x)|>\epsilon)\rightarrow 0$.
 \end{enumerate}
 
-\begin{theorem}
-	If $f_n \rightarrow f$ is $L^1$, then $f_n \rightarrow f$ in measure.
-\end{theorem}
+\begin{remark}
+		Convergence in measure has is metrizable, for example, one can take
+			$\rho(f,g)=\int \frac{|f-g|}{1+|f-g|}$.
+\end{remark}
 
+There are some implications / non-implications between the various modes of convergence:
+\begin{enumerate}[1.]
+	\item uniform $\Rightarrow$ pointwise $\Rightarrow$ a.e.
+	\item uniform $\Rightarrow$ a.e. uniform $\Rightarrow$ almost uniform.
+	\item uniform $\nLeftrightarrow L^1$.
+	\item a.e $\nLeftrightarrow L^1$.
+\end{enumerate}
+Let us discuss further properties.
+\begin{theorem}
+	If $f_n \rightarrow f$ in $L^1$, then $f_n \rightarrow f$ in measure.
+\end{theorem}
 \begin{proof}
-	By the 5.1 of homework 3, $\int |f_n-f| \geq \epsilon \mu(|f_n-f>\epsilon)$
+	By the Chebyshev (more precisely,
+	Markov) inequality, we have
+	$$\int |f_n-f| \geq \epsilon \mu(|f_n-f|>\epsilon).$$
+	Thus, if the integrals go to zero, the measures
+	should go to zero, too.
 \end{proof}
 
 \begin{theorem}
-	If $f_n \rightarrow f$ in measure then $\exists$ a subsequence $f_{nj}\rightarrow f$ a.e.
+	Suppose $f_n \rightarrow f$ in measure. Then there exists a subsequence
+	$f_{n_j}\rightarrow f$~a.e.
 \end{theorem}
-
 \begin{proof}
-	It's enough to show $f_n\rightarrow f$ Cauchy in $\mu$ then there exist subsequence converge $f$ in $\mu$.
-	Find $g_j=f_{nj}$, such that $$E_j={|g_j-g_{j+1}|\geq 2^{-j}}; \mu(E_j)\leq 2^{-j}$$
-	Then let $$F_k=\cup_{j = k}^{\infty}, \mu(F_k)\leq 2^{1-k}$$
-	On $F_{k}^C$, $i,j\geq k$. $$|g_j-g_i|\leq \sum_{1}^{j}|g_j-g_{j+1}|\leq 2^{1-i}$$
-	 Hence it's point wise Cauchy on $F_k^C$, let $$F=\cap_{k=1}^{\infty}F_k=\limsup E_j, \mu(F)=0$$ $f=lim_{a.e} g_j$ on $F^C$.
-		(rest them2.30/exercise)\\
-		Note: $$\{|fn-fm|\geq \epsilon \} \subseteq \{|f_n-f|\geq \frac{\epsilon}{2}\}\cup \{|f_m-f|\geq \frac{\epsilon}{2} \}$$ So if $f_n\rightarrow f $ in $\mu$ then Cauchy in $\mu$.
+	We will show that if 
+	the sequence $\{f_n\}$ is Cauchy in measure,
+	then there exists a subsequence which converges a.e.
+	
+	Find $g_j=f_{n_j}$, such that for $$E_j:={|g_j-g_{j+1}|\geq 2^{-j}},\qquad  \mu(E_j)\leq 2^{-j}.$$
+	Then let 
+	\begin{equation*}
+		F_k=\bigcup_{j = k}^{\infty} E_j,\qquad 
+		\mu(F_k)\leq 2^{1-k}.
+	\end{equation*}
+	On $F_{k}^C$, for $j\ge i\ge k$, we have
+	\begin{equation*}
+		|g_j-g_i|\leq \sum_{m=i}^{j}|g_m-g_{m+1}|\leq 2^{1-i}.
+	\end{equation*}
+	Let 
+	$$F:=\bigcap_{k=1}^{\infty}F_k=\limsup E_j,\qquad  \mu(F)=0.$$
+	The sequence $g_j$ is pointwise Cauchy on $F^C$.
+	Therefore, we can define $f$ to be the a.e. limit of 
+	$g_j$.
+	
+	It remains to show that if the sequence converges in measure,
+	then it is Cauchy in measure. Indeed, we have
+	\begin{equation*}
+		\{|f_n-f_m|\geq \epsilon \} \subseteq \{|f_n-f|\geq 
+		\frac{\epsilon}{2}\}\cup \{|f_m-f|\geq \frac{\epsilon}{2} \}. 
+	\end{equation*}
+	So if $f_n\rightarrow f $ in measure, the set on the right-hand side 
+	has small probability, so the sequence is also Cauchy in measure.
 \end{proof}
-\pagebreak
+
 \subsection{Examples}
 
-Here are some typical example of different modes of convergence.
+Here are some typical counterexamples for testing different modes of convergence:
 \begin{enumerate}[(1)]
-\item $f_n=n^{-1}\mathbf{1}_{(0,n)}$
-\item $f_n=\mathbf{1}_{(n,n+1)}$
-\item $f_n=n\mathbf{1}_{[0,1/n]}$
-\item $f_n=\mathbf{1}_{[j/2^k,(j+1)/2^k]}$ where $n=2^k+j$ with $0\leq j<2^k$
+	\item $f_n=n^{-1}\mathbf{1}_{(0,n)}$.
+	\item $f_n=\mathbf{1}_{(n,n+1)}$.
+	\item $f_n=n\mathbf{1}_{[0,1/n]}$.
+	\item $f_n=\mathbf{1}_{[j/2^k,(j+1)/2^k]}$ where $n=2^k+j$ with $0\leq j<2^k$.
+		This sequence of functions behaves as follows:
+		\begin{equation*}
+			\mathbf{1}_{[0,1]},
+			\mathbf{1}_{[0,1/2]},
+			\mathbf{1}_{[1/2,1]},
+			\mathbf{1}_{[0,1/4]},
+			\mathbf{1}_{[1/4,1/2]},
+			\mathbf{1}_{[1/2,3/4]},
+			\mathbf{1}_{[3/4,1]},
+		\end{equation*}
+		and so on.
 \end{enumerate}
 
-Then in(1), (2), and (3), $f_n \rightarrow 0$ uniformly, pointwise and a.e respectively, but they are not converge in $L^1$.In (4) $f_n \rightarrow 0$ in $L^1$ but not pointwise/a.e.
+Then in(1), (2), and (3), $f_n \rightarrow 0$ uniformly, pointwise and a.e respectively.
+But they do not converge in $L^1$.
+In (4), $f_n \rightarrow 0$ in $L^1$, but not pointwise.
 
 
 \end{document}
