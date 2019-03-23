@@ -117,4 +117,100 @@ Can take $T_g(f)=\int f\bar{g} d\mu$ for $g\in L^\infty$.
 
 We will see that $(L^1)^*=L^\infty$, but $(L^\infty)^*$.
 
+\section{March 21}
+
+Assume $\mu(X)$ finite.
+
+Recall
+\begin{itemize}
+    \item Convex
+    \item Jensen ($\mu(X)=1$) $\phi(\int fd\mu)\leq \int\phi(f(x))d\mu(x)$.
+    \item Young
+\end{itemize}
+
+If $\phi:\RR\rightarrow\RR$ convex and $f$ is $L^1$, is $\phi\circ f\in L^1$? If $\phi\circ f\notin L^1$ then $\int \phi\circ f=+\infty$.
+
+H\"older inequality
+
+Def: $||f||_p=\left(\int|f|^p\right)^{1/p}$
+Def: Conjugate, $p\to p'$ s.t. that $1/p+1/p'=1$ then $p'=p/(p-1)$.
+
+Want to show $||f||_p$ is a norm in $L^p$.
+
+H\"older inequality: If $f\in L^p$ and $g\in L^{p'}$, then $||fg||_1\leq ||f||_p||g||_{p'}$.
+
+Cor (Cauchy-Schwarz): $p=2$, then $\int fg \leq \sqrt{\int f^2\int g^2}$ and $||x_1x_2+y_1y_2|\leq \sqrt{(x_1^2+x_2^2)(y_1^2+y_2)^2}$.
+
+Cor: $p=1$, $p'=\infty$, then $\int |fg|\leq \int |f|\text{ess}\sup |g|$.
+
+Proof of H\"older
+
+Assume $p\in(1,\infty)$ and $f,g\geq 0$ with $||f||_p\neq 0$ and $||g||_{p'}\neq 0$. Define $F=f/||f||_p$ and $G=g/||g||_{p'}$.
+Then we claim that $FG\leq \alpha F^p+(1-\alpha) G^{p'}$. Consider $F^{p\alpha}G^{p'(1-\alpha)}$ with $\alpha=1/p$. Then
+AM-GM inequality yields $FG=F^{p/p}G^{p'(1-1/p)}\leq \frac{1}{p}F^p+(1-\frac{1}{p}) G^{p'}$.
+Moreover $\int F^p=\int G^{p'}=1$ and so $\int FG\leq 1$. QED.
+
+Minkowski inequality: $||f+g||_p\leq ||f||_p+||g||_p$.
+
+Proof: We can assume that $p\in(1,\infty)$. Then $t\mapsto t^p$ is convex for such $p$. Therefore, $((f+g)/2)^p\leq f^p/2+g^p/2$
+which implies $f+g\in L^p$. Furthermore, $(f+g)^p=f(f+g)^{p-1}+g(f+g)^{p-1}$ and $(f+g)^{(p-1)p'}=(f+g)^p\in L^1$. Thus we can
+use H\"older to get that $\int |f(f+g)^{p-1}|\leq ||f||_p \cdot \left(\int|f+g|^p\right)^{1/p'}$. Similarly,
+$\int|g(f+g)^{p-1}\leq ||g||_p\left(|f+g|^p\right)^{1/p'}$. Thus $\int |f+g|^p\leq ...$. Almost QED
+
+Cor: $L^p$ is a normed vector space. (Above proof showed vector space followed by norm).
+
+What about when $p<1$? $L^p$ is still a vector space, but $||\alpha||_p=|\alpha|||f||_p$ and $||f||_p=0\Rightarrow f=0$ a.e..
+However, no triangle inequality. But $||f+g||_p\leq 2^{1/p-1} (||f||_p+||g||_p)$. This is a \textit{quasi-norm}.
+We still have a metric on this space. This is left as an exercise.
+
+Thm: $L^p$ is Banach for $1\leq p< \infty$.
+
+Pf: Left to show that $L^p$ is complete with respect to norm. Suppose $(f_n)_{n\in\NN}$ is Cauchy in $L^p$. Ergo,
+$(f_n)$ is Cauchy in $\mu$ by Chebyshev ($\varepsilon \mu(\{x:|g(x)|>\varepsilon\})^{1/p}\leq ||g|_p$ for all $\varepsilon>0$).
+This implies that there exists a subsequence $(f_{n_j})$ that converges to $f$ a.e.. Want $f_n\to f$ in $L^p$.
+We know that for $n,m>N$ we have $||f_n-f_m||_p<\varepsilon$. Fatou implies that when $m>N$,
+$||f-f_m||_p \leq \liminf_{j:n_j>N} ||f_{n_j}-f_m||_p<\varepsilon$. Thus $f_m\to f$ in $L^p$. QED.
+
+Inclusion: If $\mu(X)<\infty$ then $L^p\subseteq L^q$ for all $\infty\geq q>p\geq 1$.
+
+Note: If $X=\RR$, $\mu$ is Lebesgue. Take $f=1/x\; 1_{x>1}$ then $f\in L^{1+\delta}$ and $f\notin L^1$.
+
+Pf of inclusion: Take $r=q/p>1$, $r'$ such that $1/r+1/r'=1$.
+Write $||f||_p=||f\cdot 1||_p=\left(\int |f|^p\cdot 1\right)^{1/p}\leq \left[  \left(\int|f|^{pq/p}\right)^{p/q}\mu(X)^{1/r'} \right]^{1/p}=k(X,p,q)||f||_q$
+where $k$ is a constant dependent on $X$, $p$, and $q$. QED.
+
+Riesz representation theorems:
+
+Def: If $V$ is a Banach space, $V^*$ is the space of linear functionals $\phi:V\rightarrow\RR$ with $||\phi||_{V^*}=\sup_{x\neq 0}\frac{|\phi(x)|}{||x||}$.
+
+What is $(L^p)^*$?
+
+Hahn-Banach Thm: If $V$ is a Banach space and $U$ is a linear subspace over $\RR$ and $\phi:U\rightarrow\RR$ a linear functional
+where $\phi(x)\leq p(x)$ for all $x\in U$ with $p$ convex, then there exists a functional $\psi:V\rightarrow\RR$ such that
+$\psi_U=\phi$ and $\psi(x)\leq p(x)$ for all $x\in V$. 
+
+Thm: $(L^p)^*=L^{p'}$ for $1\leq p<\infty$ and $(L^\infty)^*\neq L^1$.
+
+IntuitionL Let $\lambda(f)$ be a functional with $f\in L^p$. Identify it with $\int fgd\mu$ where $g$ a fixed function in $L^{p'}$.
+
+Pf: 
+We start by showing $(L^\infty)^*$ is not $L^1$. Take $L^\infty([0,1])=V$ (with Lebesgue measure) and $U$ to be the set of functions continuous on $[0,1]$
+except maybe at $x=1/2$. Define $\phi(f)=\lim_{x\to 1/2 +} f(x)-\lim_{x\to 1/2 -}f(x)$. By Hahn-Banach, this extends to $\psi$ on $V$.
+Assume there exists an $h$ such that $\psi(f)=\int_0^1 h\cdot f d x$. We can take an open set $E\subseteq [0,1]$ with $f_n\to 1_E$ ($f_n\in C([0,1])$).
+Then $\psi(f_n)=0$ but $\int h f_n\to \int h 1_E=0$ by DCT. Thus $h=0$ and $\psi=0$. But $\psi$ cannot be (see any function with a jump at 1/2).
+Ergo, $(L^\infty)^*\neq L^1$.
+
+We now show that $(L^p)^*=L^{p'}$. Let $\Lambda(f)$ be a functional. We want to find $g\in L^{p'}$ such that $\Lambda(f)=\int fg$.
+Define a signed measure $\nu(A)=\Lambda (1_A_)$. Without loss of generality take $\mu(X)=1$ and $||\Lambda||=1$ (normalize).
+Thus, $|\nu(A)|\leq ||1_A||_p=\mu(A)^{1/p}$. Moreover $\nu$ is $\sigma$-additive. So, $E=E_1\cup E_2\cup\ldots$ and
+$1_E$ is the $L^p$ limit of $1_{E_1\cup \dots\cup E_n}$ and $\Lambda$ is continuous. Thus $\nu$ is indeed a signed measure
+that is absolutely continuous with respect to $\mu$. Ergo, there exists a Radon-Nikodym derivative $h$ so that
+$\nu(A)=\int_A h d\mu$. This further implies that for all $f\in L^p$, $\Lambda(f)=\int hf d\mu\leq ||f||_p$. We still need $h\in L^{p'}$.
+We already know $h\in L^1$. The following lemma completes the proof.
+
+Lem: $\int |hf|\leq c||f||_p$ for all $f\in L^p$ then $h\in L^{p'}$.
+
+Pf: WLOG: assume $c=1$. Suppose $h_n\to h$ monotonically with all $h_n$'s bounded. Then $\int h_n^{p'}=\int h_n^{p'-1}h_n\leq ||h_n^{p'-1}||_p$ by
+assumption. Then $(p'-1)p=p'$ so $\int h_n^{p'}\leq ||h_n||_{p'}^{p'/p}$. Thus $||h_n||_{p'}\leq ||h_n||_{p'^{1/p}}$ and
+$||h_n||_{p'}\leq 1$. Ergo, $||h||_{p'}\leq 1$. QED.
 \end{document}
