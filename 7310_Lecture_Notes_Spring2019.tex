@@ -55,6 +55,7 @@
 	\item January 29 and 31, 2019 --- ???
 	\item February 5 and 7, 2019 --- ???
 	\item February 12 and 14, 2019 --- Shunyu Wan
+	\item March 19 and 21, 2019 --- Matthew McCarthy
 \end{enumerate}
 
 \tableofcontents
@@ -316,7 +317,7 @@ We now begin the proof of the
 Caratheodory's extension theorem:
 
 \begin{theorem}[Caratheodory]
-	\label{thm:Caratheodory}
+	\label{theorem:Caratheodory}
 Let $\mu$ be an outer measure on a set $X$, then the following statements are true:
 
 1) $\mathscr{F} = \{A\colon \textnormal{$A$ is a $\mu$-measurable set}\}$ is a $\sigma$-algebra;
@@ -373,7 +374,7 @@ Note that in the proofs we need only to check \( \geq \) since \( \leq \) follow
 from subadditivity.
 Denote by $\mathscr{F}$ the set of all $\mu$-measurable subsets.
 
-\begin{proof}[Rest of the proof of Caratheodory theorem (\Cref{thm:Caratheodory})]
+\begin{proof}[Rest of the proof of Caratheodory theorem (\Cref{theorem:Caratheodory})]
 	We have shown in Lecture 2 that $\mathscr{F}$ is an algebra (closed under finite unions,
 	intersections, and complements) and that $\mu$ is finitely additive on $\mathscr{F}$.
 
@@ -1119,5 +1120,333 @@ Then in(1), (2), and (3), $f_n \rightarrow 0$ uniformly, pointwise and a.e respe
 But they do not converge in $L^1$.
 In (4), $f_n \rightarrow 0$ in $L^1$, but not pointwise.
 
+\section{March 19, 2019}
+
+What we've done so far:
+\begin{enumerate}
+    \item Measure and integral
+    \item Radon Nikodym derivatives
+    \item Stone-Weierstrass
+\end{enumerate}
+
+\subsection{\( L^p \), \( L^\infty \), Norms, and Banach Spaces}
+
+Let \((X,F,\mu)\) be a measure space. Then, in addition to the \(L^1\) norm, we also have \(L^p\) and \(L^\infty \)
+norms.
+
+\begin{definition}[\(L^p\)-space]
+    The space \(L^p(\mu)\) is defined to be the set of \(F\)-measurable functions, \(f:X\rightarrow\mathbb{R} \), such that
+    \(|f|^p\in L^1(\mu)\). Moreover, when \(1\leq p<q\leq\infty \) (and \(\mu(X)<\infty \)), we have that
+    \(L^q(\mu)\subseteq L^p(\mu)\) (this will be proven later).
+\end{definition}
+% McCarthy: We had a discussion on ``$\frac{1}{x}$ on $[0,1]$'', but I didn't quite catch it.
+
+\begin{definition}[\(L^\infty \)-space]
+    Suppose \(\mu(X)<\infty \), then \(L^\infty(\mu)\) is the space of \(F\)-measurable functions where
+    \(\text{ess}\sup |f|<\infty \). Note that the \textit{essential supremum} of \(f\) is defined as
+    \(\text{ess}\sup f=\sup \{a:\exists\varepsilon>0\text{ s.t. } \mu(f^{-1}(a-\varepsilon,a+\varepsilon))>0\} \).
+    This is the space of \textit{essentially bounded} functions (bounded except on a set of measure 0).
+\end{definition}
+
+\begin{definition}[Normed vector space]
+    Let \(V\) be a vector space and let \(||\cdot||:V\rightarrow\mathbb{R}_{\geq0}\) be a function. If \(V\) and \(||\cdot||\),
+    satisfy the following properties then \((V,||\cdot||)\) is a \textit{normed vector space} (over \(\mathbb{R} \)). 
+    \begin{itemize}
+        \item For all \(x\in V\), \(||x||=0\) implies that \(x=0\).
+        \item For all \(x\in V\) and \(\lambda\in\mathbb{R} \), \(||\lambda x||=|\lambda| ||x||\).
+        \item For all \(x,y\in V\), \(||x+y||\leq ||x||+||y||\).
+    \end{itemize}
+\end{definition}
+
+Examples of normed vector spaces:
+\begin{itemize}
+    \item \(L^p\) with the norm \(||f||_p={\left(\int|f|^p \right)}^{1/p}\). The triangle inequality for this norm is
+    the \textit{Minkowski inequality}.
+    \item \(L^\infty \) with the norm \(||f||_\infty =\text{ess}\sup |f|\).
+\end{itemize}
+We will prove that these are norms later.
+
+\begin{definition}[Banach space]
+    A normed vector space is \textit{Banach} if it is complete with respect to the metric \(\rho(x,y)=||x-y||\) where
+    \(||\cdot||\) is the norm.
+\end{definition}
+
+We will show later that \(p>1\) implies that \(L^p\) is Banach.
+
+Note that \(L^p\) need not be Banach for \(p\leq 1\) under usual metric. For example when \(p=1/2\),
+\({(\sqrt{x}+\sqrt{y})}^2=x+y+2\sqrt{xy}\not\geq x+y\).
+
+Exercise: Show that \({(||f-g||_p)}^p\) defines a metric on \(L^p\).
+
+Note that all norms on \(\mathbb{R}^n\) are topologically equivalent. That is if \(||\cdot||_1\) and \(||\cdot||_2\) are norms
+on \(\mathbb{R}^n\), then there exists a \(c>0\) such that for any \(x\), \(c^{-1}||x||_2\leq||x||_1\leq c||x||_2\). To prove
+this, fix a basis \((e_i)\) of \(\mathbb{R}^n\) and look at \(\min_i ||e_i||\) and \(\max_i ||e_i||\).
+
+% TODO: make TikZ diagram
+When \(X\) is the 2 point space under counting measure, consider the set of \( (x,y)\) such that
+\(||(x,y)||_p={(|x|^p+|y|^p)}^{1/p}\leq 1\) (see diagram). Taking \(p=2\) will give us that the set is a disk, when
+\(p=1\) the set is a diamond. As \(p\) grows larger, the set approximates a square and \(p=\infty\) gives us a square
+(the norm is the max norm). When \(p<1\), the sides of the diamond start to get crushed down.
+
+\begin{definition}[Bounded operator]
+    Let \(V\) and \(W\) be vector spaces and let \(T:V\rightarrow W\) be a linear operator. Then
+    \(||T||=\sup_{v\neq 0} \frac{||Tv||_W}{||v||_V}\). If \(||T||<\infty \), then \(T\) is \textit{bounded}.
+\end{definition}
+
+In finite dimensions, all operators are bounded.
+
+Examples of operators: 
+\begin{itemize}
+    \item \(V=\{{(x_n)}_{n\in\mathbb{N}}: {\left(\sum x_n^2\right)}^{1/2}\} \), \(T((x_n))=(nx_n)\).
+    \item \(V=C^1([0,1])\), \(W=C([0,1])\), \(T=\frac{d}{dx}:C^1\rightarrow C\) which is a dense domain. Here \(T\) is
+    not bounded, however this is coming from the fact that its not always defined.
+\end{itemize}
+
+To get a truly unbounded operator, need axiom of choice (e.g.\ it might as well be a myth). Take bases of Banach spaces
+\(V\) and \(W\), \((e_\alpha)\) and \((f_\beta)\). Take a subcollection \((e_i)\subseteq (e_\alpha)\) and then map
+\(e_i\mapsto ie_i\).
+
+An operator is bounded iff it is continuous since \(||T(v+h)-T(v)||=||T(h)||\leq ||T||\cdot ||h||\).
+
+Given \(V\), take \(V^*\) to be the dual space (the space of bounded functionals on \(V\)) and give it the operator
+norm.
+
+\subsection{Convexity}
+
+\begin{definition}[Convex set]
+    A set \(A\subseteq \mathbb{R}^d\) is \textit{convex} if for all \(x,y\in A\) and \(\alpha\in[0,1]\) we have that
+    \(\alpha x+(1-\alpha)y\in A\).
+\end{definition}
+
+Exercise: All convex sets are Borel measureable. Sketch: Proceed via induction on \(d\). It is true in \(\mathbb{R}^1\). Slice
+\(A\) into \(A_{x_1}\subseteq\mathbb{R}^{d-1}\) slices for fixed \(x_1\).
+
+\begin{definition}[Convex function]
+    A function \(f\) is \textit{convex} if its epigraph, \( \{(x,y):y\geq f(x)\} \) is convex. That is, if
+    \(f(\alpha x+(1-\alpha) y)\leq \alpha f(x)+(1-\alpha) f(y)\) for all \(x,y\) and \(\alpha\in[0,1]\). Alternatively,
+    if for all \(x,y,z\) with \(x<y<z\) we have that \(\frac{f(z)-f(y)}{z-y}\geq \frac{f(y)-f(x)}{y-x}\).
+\end{definition}
+
+\begin{proposition}
+    Any convex function is continuous.
+\end{proposition}
+\begin{proof}
+    Suppose \(f:\mathbb{R}\rightarrow\mathbb{R} \) and \(x_2<x<y<x_1\). Then 
+    \[
+        \frac{f(x_1)-f(y)}{x_1-y}\geq\frac{f(y)-f(x)}{y-x}\geq \frac{f(y)-f(x_2)}{y-x_2}
+    \]
+    and slopes are bounded and increase as \(x\) increases. Ergo, this converges as \(x\to y\) and thus \(f\) is
+    continuous and has directional derivatives. If \(f:\mathbb{R}^d\rightarrow\mathbb{R}\) then \(g(t)=f(x+tv)\) is convex in \(t\)
+    and is thus has directional derivatives (since it is a convex function from \(\mathbb{R} \) to \(\mathbb{R} \)).
+    Ergo, \(D_v^\pm = \lim_{t\to 0\pm} \frac{f(x+tv)-f(x)}{t}\) and \(f\) is continuous.
+\end{proof}
+\begin{corollary}
+    Since convex functions are continuous, they are Borel measureable.
+\end{corollary}
+
+Recall that if \(X,F,\mu \) is a measure space and \(f:X\rightarrow \mathbb{R} \) is measurable we can push forward \(\mu \)
+to \(\mathbb{R} \) with \(f_*\mu(E)=\mu(f^{-1}(E)) \).
+
+\begin{theorem}[Jensen's Inequality]
+If \(f\in L^1(X,F,\mu)\) with \(\mu(X)<\infty \) and \(\varphi:\mathbb{R}\rightarrow\mathbb{R} \) is convex then
+    \[
+        \varphi\left(\frac{1}{\mu(X)}\int fd\mu\right)\leq \frac{1}{\mu(X)}\int \varphi(f(x))\mu(dx).
+    \]
+\end{theorem}
+\begin{proof}
+    Let \(E=\frac{1}{\mu(X)}\int fd\mu \) and
+    \(\beta=D^-\varphi(E)=\lim_{\varepsilon\to 0-}\frac{\varphi(E+\varepsilon)-varphi(E)}{\varepsilon}\leq D^+\varphi(E)\).
+    Then \(\varphi(s)-\varphi(E)\geq \beta(s-E)\). Ergo, \(\varphi(f(x))-\varphi(E)\geq\beta(f(x)-E)\). Thus,
+    \(\frac{1}{\mu(X)}\int d\mu(x)\geq 0\).
+\end{proof}
+
+\begin{corollary}
+    \begin{enumerate}
+        \item Young inequality: If \(\varphi(t)=e^t\) and \(\mu(X)=1\) then \(e^{\int f}\leq \int e^f\).
+        \item AMGM inequality: Take \(X=\{1,\ldots, n\} \) and let \(\alpha_1,\ldots,\alpha_n>0\) with \(\sum a_i=1\).
+        Let \(\mu(\{i\})=\alpha_i\). Then \(y_i=e^{f(i)}\geq 0\) and \(\prod y_i^{\alpha_i} \leq \sum \alpha_i y_i\).
+    \end{enumerate}
+\end{corollary}
+
+% \subsection{What we covered today}
+
+% Normed spaces, Banach spaces, bounded operators
+
+% Convexity
+
+% Jensen's Inequality
+
+% \(L^p\), \(L^\infty \)
+
+% \subsection{Goals for next time}
+
+% \(L^q\subseteq L^p\) when \(q>p>1\), Banach, \((L^p)^*\).
+
+% Jensen, (H\"older, Minkowski).
+
+% Suppose \(f\in L^1\mapsto T(f)\in\mathbb{R} \). Then \(T(f)=\int f d\mu \) is an example of a functional. We can also have
+% \(T_A(f)=\int 1_A f\). Can take \(T_g(f)=\int f\bar{g} d\mu \) for \(g\in L^\infty \).
+
+% We will see that \({(L^1)}^*=L^\infty \), but \({(L^\infty)}^*\neq L^1\).
+
+\section{March 21, 2019}
+
+Assume $\mu(X)$ finite.
+
+% Recall
+% \begin{itemize}
+%     \item Convex
+%     \item Jensen ($\mu(X)=1$) $\phi(\int fd\mu)\leq \int\phi(f(x))d\mu(x)$.
+%     \item Young
+% \end{itemize}
+
+If $\phi:\mathbb{R}\rightarrow\mathbb{R}$ convex and $f\in L^1(\mu)$, is $\phi\circ f\in L^1$? If $\phi\circ f\notin L^1$ then $\int \phi\circ f=+\infty$.
+
+% There was a point here, but I didn't catch it.
+
+\subsection{H\"older's Inequality and its Consequences}
+
+H\"older inequality
+
+\begin{definition}
+    Let $f$ be a $\mu$-measurable function. Then the \textit{$L^p$ norm of $f$} is defined as
+    $||f||_p=\left(\int |f|^p\right)^{1/p}$. Moreover the \textit{conjugate} to $p$ is a real number
+    $p'$ such that $\frac{1}{p}+\frac{1}{p'}=1$. Simply stated, the conjugate to $p$ is $p'=\frac{p}{p-1}$.
+\end{definition}
+
+We want to show $||f||_p$ is a norm for $L^p$. To this end, we have H\"older's inequality.
+
+\begin{theorem}[H\"older's Inequality]
+    If $f\in L^p(\mu)$ and $g\in L^{p'}(\mu)$ then $||fg||_1\leq ||f||_p||g||_{p'}$.
+\end{theorem}
+
+\begin{corollary}[Cauchy-Schwarz Inequality]
+    Let $f,g\in L^2(\mu)$, then
+    \[
+        \int fg \leq \sqrt{\int f^2\int g^2}
+    \]
+    and when $\mu$ is the counting measure on a two point set
+    \[
+        ||x_1x_2+y_1y_2||\leq \sqrt{(x_1^2+x_2^2)(y_1^2+y_2^2)}.
+    \]
+\end{corollary}
+\begin{proof}
+    Use H\"older's inequality with $p=p'=2$.
+\end{proof}
+
+\begin{corollary}
+    Let $f\in L^1(\mu)$ and $g\in L^\infty(\mu)$. Then,
+    \[
+        \int |fg| \leq \int |f|\text{ess}\sup |g|.
+    \]
+\end{corollary}
+\begin{proof}
+    Use H\"older with $p=1$ and $p'=\infty$.
+\end{proof}
+
+\begin{proof}[Proof of H\"older]
+    Assume $p\in(1,\infty)$ and $f,g\geq 0$ with $||f||_p\neq 0$ and $||g||_{p'}\neq 0$. Define $F=f/||f||_p$ and $G=g/||g||_{p'}$.
+    Then we claim that $FG\leq \alpha F^p+(1-\alpha) G^{p'}$. Consider $F^{p\alpha}G^{p'(1-\alpha)}$ with $\alpha=1/p$. Then
+    AM-GM inequality yields $FG=F^{p/p}G^{p'(1-1/p)}\leq \frac{1}{p}F^p+(1-\frac{1}{p}) G^{p'}$.
+    Moreover $\int F^p=\int G^{p'}=1$ and so $\int FG\leq 1$.
+\end{proof}
+
+\begin{theorem}
+    For $p\geq 1$ and $f,g\in L^p(\mu)$,
+    \[
+        ||f+g||_p\leq ||f||_p+||g||_p.
+    \]
+\end{theorem}
+
+\begin{proof}
+    We can assume that $p\in(1,\infty)$. Then $t\mapsto t^p$ is convex for such $p$. Therefore, $((f+g)/2)^p\leq f^p/2+g^p/2$
+    which implies $f+g\in L^p$. Furthermore, $(f+g)^p=f(f+g)^{p-1}+g(f+g)^{p-1}$ and $(f+g)^{(p-1)p'}=(f+g)^p\in L^1$. Thus we can
+    use H\"older to get that $\int |f||(f+g)|^{p-1}\leq ||f||_p \cdot \left(\int|f+g|^p\right)^{1/p'}$. Similarly,
+    $\int|g||(f+g)|^{p-1}\leq ||g||_p\left(\int |f+g|^p\right)^{1/p'}$. Thus 
+    \begin{align*}
+        ||f+g|_p^p&=\int |f+g|^p\\
+        &\leq \int |f||f+g|^{p-1} + \int |g||f+g|^{p-1}\\
+        &\leq (||f||_p+||g||_p)\left(\int |f+g|^p\right)^{1/p'}\\
+        &=(||f||_p+||g||_p)||f+g||_p^{p-1}
+    \end{align*}
+    as desired.
+\end{proof}
+
+\begin{corollary}
+    For $p\geq 1$, $L^p(\mu)$ is a normed vector space.
+\end{corollary}
+
+What about when $p<1$? $L^p$ is still a vector space, but $||\alpha||_p=|\alpha|||f||_p$ and $||f||_p=0\Rightarrow f=0$ a.e..
+However, the triangle inequality does not hold. But $||f+g||_p\leq 2^{1/p-1} (||f||_p+||g||_p)$. This is a \textit{quasi-norm}.
+We still have a metric on this space. This is left as an exercise.
+
+\begin{theorem}
+    $L^p$ is Banach for $1\leq p< \infty$.
+\end{theorem}
+\begin{proof}
+    All that is left to show that $L^p$ is complete with respect to norm. Suppose $(f_n)_{n\in\mathbb{N}}$ is Cauchy in $L^p$. Ergo,
+    $(f_n)$ is Cauchy in $\mu$ by Chebyshev ($\varepsilon \mu(\{x:|g(x)|>\varepsilon\})^{1/p}\leq ||g|_p$ for all $\varepsilon>0$).
+    This implies that there exists a subsequence $(f_{n_j})$ that converges to $f$ a.e.. Want $f_n\to f$ in $L^p$.
+    We know that for $n,m>N$ we have $||f_n-f_m||_p<\varepsilon$. Fatou implies that when $m>N$,
+    $||f-f_m||_p \leq \liminf_{j:n_j>N} ||f_{n_j}-f_m||_p<\varepsilon$. Thus $f_m\to f$ in $L^p$.
+\end{proof}
+
+\begin{proposition}
+    If $\mu(X)<\infty$ then $L^p\subseteq L^q$ for all $\infty\geq q>p\geq 1$.
+\end{proposition}
+
+Note: If $X=\mathbb{R}$, $\mu$ is Lebesgue. Take $f=1/x\; 1_{x>1}$ then $f\in L^{1+\delta}$ and $f\notin L^1$.
+
+\begin{proof}
+    Take $r=q/p>1$, $r'$ such that $1/r+1/r'=1$.
+    Write
+    $||f||_p=||f\cdot 1||_p=\left(\int |f|^p\cdot 1\right)^{1/p}\leq \left[\left(\int|f|^{pq/p}\right)^{p/q}\mu(X)^{1/r'} \right]^{1/p}=k(X,p,q)||f||_q$
+    where $k$ is a constant dependent on $X$, $p$, and $q$.
+\end{proof}
+
+\subsection{What is $(L^p)^*$?}
+
+\begin{definition}
+    If $V$ is a Banach space, the \textit{dual space} $V^*$ is the space of linear functionals $\phi:V\rightarrow\mathbb{R}$ with
+    $||\phi||_{V^*}=\sup_{x\neq 0}\frac{|\phi(x)|}{||x||}$.
+\end{definition}
+
+\begin{theorem}[Hahn-Banach Theorem]
+    If $V$ is a Banach space and $U$ is a linear subspace over $\mathbb{R}$ and $\phi:U\rightarrow\mathbb{R}$ a linear functional
+    where $\phi(x)\leq p(x)$ for all $x\in U$ with $p$ convex, then there exists a functional $\psi:V\rightarrow\mathbb{R}$ such that
+    $\psi_U=\phi$ and $\psi(x)\leq p(x)$ for all $x\in V$. 
+\end{theorem}
+
+\begin{theorem}
+    $(L^p)^*=L^{p'}$ for $1\leq p<\infty$ and $(L^\infty)^*\neq L^1$.
+\end{theorem}
+
+\begin{proof}
+    Intuition: Let $\lambda(f)$ be a functional with $f\in L^p$. Identify it with $\int fgd\mu$ where $g$ a fixed function in $L^{p'}$.
+
+    We start by showing $(L^\infty)^*$ is not $L^1$. Take $L^\infty([0,1])=V$ (with Lebesgue measure) and $U$ to be the set of functions continuous on $[0,1]$
+    except maybe at $x=1/2$. Define $\phi(f)=\lim_{x\to 1/2 +} f(x)-\lim_{x\to 1/2 -}f(x)$. By Hahn-Banach, this extends to $\psi$ on $V$.
+    Assume there exists an $h$ such that $\psi(f)=\int_0^1 h\cdot f d x$. We can take an open set $E\subseteq [0,1]$ with $f_n\to 1_E$ ($f_n\in C([0,1])$).
+    Then $\psi(f_n)=0$ but $\int h f_n\to \int h 1_E=0$ by DCT. Thus $h=0$ and $\psi=0$. But $\psi$ cannot be (see any function with a jump at 1/2).
+    Ergo, $(L^\infty)^*\neq L^1$.
+
+    We now show that $(L^p)^*=L^{p'}$. Let $\Lambda(f)$ be a functional. We want to find $g\in L^{p'}$ such that $\Lambda(f)=\int fg$.
+    Define a signed measure $\nu(A)=\Lambda (1_A)$. Without loss of generality take $\mu(X)=1$ and $||\Lambda||=1$ (normalize).
+    Thus, $|\nu(A)|\leq ||1_A||_p=\mu(A)^{1/p}$. Moreover $\nu$ is $\sigma$-additive. So, $E=E_1\cup E_2\cup\ldots$ and
+    $1_E$ is the $L^p$ limit of $1_{E_1\cup \dots\cup E_n}$ and $\Lambda$ is continuous. Thus $\nu$ is indeed a signed measure
+    that is absolutely continuous with respect to $\mu$. Ergo, there exists a Radon-Nikodym derivative $h$ so that
+    $\nu(A)=\int_A h d\mu$. This further implies that for all $f\in L^p$, $\Lambda(f)=\int hf d\mu\leq ||f||_p$. We still need $h\in L^{p'}$.
+    We already know $h\in L^1$. The following lemma completes the proof.
+\end{proof}
+
+\begin{lemma}
+    $\int |hf|\leq c||f||_p$ for all $f\in L^p$ then $h\in L^{p'}$.
+\end{lemma}
+
+\begin{proof}
+    WLOG: assume $c=1$. Suppose $h_n\to h$ monotonically with all $h_n$'s bounded. Then $\int h_n^{p'}=\int h_n^{p'-1}h_n\leq ||h_n^{p'-1}||_p$ by
+    assumption. Then $(p'-1)p=p'$ so $\int h_n^{p'}\leq ||h_n||_{p'}^{p'/p}$. Thus $||h_n||_{p'}\leq ||h_n||_{p'^{1/p}}$ and
+    $||h_n||_{p'}\leq 1$. Ergo, $||h||_{p'}\leq 1$.
+\end{proof}
 
 \end{document}
